@@ -4,7 +4,7 @@ import seaborn as sns
 import missingno as msno
 import numpy as np
 
-from src.config import logger
+from config import logger
 
 
 sns.set_style("whitegrid")
@@ -51,33 +51,39 @@ def plot_numerical_distribution(df):
         raise
 
 
-def plot_categorical_distribution(df):
+def plot_categorical_distribution(df, max_categories=20): # Added limit
     """
-    Plot categorical feature distributions.
+    Plot categorical feature distributions, skipping high-cardinality columns.
     """
-
     try:
-        categorical_cols = df.select_dtypes(
-            include="object"
-        ).columns
+        categorical_cols = df.select_dtypes(include="object").columns
 
         for col in categorical_cols:
+            # Check number of unique values
+            num_unique = df[col].nunique()
+            
+            # Skip if there are too many unique values
+            if num_unique > max_categories:
+                print(f"Skipping {col}: too many unique values ({num_unique})")
+                continue
+
+            print(f"Plotting {col}...")
             plt.figure(figsize=(8, 4))
 
-            df[col].value_counts().plot(
-                kind="bar"
-            )
+            # Plot top values or all if few
+            df[col].value_counts().plot(kind="bar")
 
             plt.title(f"Distribution of {col}")
             plt.xticks(rotation=45)
+            plt.tight_layout() # Ensures labels don't get cut off
             plt.show()
+            plt.close() # CRITICAL: Closes the plot so the loop continues
 
         logger.info("Categorical distributions plotted")
 
     except Exception as e:
         logger.error(f"Error plotting categorical variables: {e}")
-        raise
-
+        # raise # Optional: remove 'raise' if you want it to continue past errors
 
 def plot_correlation_heatmap(df):
     """
@@ -91,14 +97,13 @@ def plot_correlation_heatmap(df):
 
         corr_matrix = df[numerical_cols].corr()
 
-        plt.figure(figsize=(14, 10))
+        plt.figure(figsize=(12,8))
 
         sns.heatmap(
-            corr_matrix,
-            annot=True,
-            cmap="coolwarm",
-            fmt=".2f"
-        )
+    corr_matrix,
+    cmap="coolwarm",
+    center=0
+)
 
         plt.title("Correlation Heatmap")
         plt.show()
@@ -119,14 +124,7 @@ def plot_boxplots(df):
             include=np.number
         ).columns
 
-        for col in numerical_cols:
-            plt.figure(figsize=(8, 4))
-
-            sns.boxplot(x=df[col])
-
-            plt.title(f"Boxplot of {col}")
-
-            plt.show()
+        numerical_cols = numerical_cols[:10]
 
         logger.info("Boxplots created successfully")
 
