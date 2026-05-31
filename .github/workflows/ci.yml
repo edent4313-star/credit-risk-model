@@ -2,11 +2,8 @@ name: CI
 
 on: 
   push:
-    # This empty list means "run on all branches"
     branches:
       - '**'
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
