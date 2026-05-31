@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.config import logger
+from config import logger
 
 
 def get_missing_values(df):

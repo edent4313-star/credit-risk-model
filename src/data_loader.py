@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-from src.config import logger
+from config import logger
 
 
 def load_data(filepath):
