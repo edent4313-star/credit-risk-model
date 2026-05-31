@@ -91,14 +91,13 @@ def plot_correlation_heatmap(df):
 
         corr_matrix = df[numerical_cols].corr()
 
-        plt.figure(figsize=(14, 10))
+        plt.figure(figsize=(12,8))
 
         sns.heatmap(
-            corr_matrix,
-            annot=True,
-            cmap="coolwarm",
-            fmt=".2f"
-        )
+    corr_matrix,
+    cmap="coolwarm",
+    center=0
+)
 
         plt.title("Correlation Heatmap")
         plt.show()
