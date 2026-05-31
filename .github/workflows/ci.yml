@@ -1,9 +1,10 @@
 name: CI
 
-# This 'on' block tells GitHub to run this whenever you push to main
-on:
+on: 
   push:
-    branches: [ main ]
+    # This empty list means "run on all branches"
+    branches:
+      - '**'
   pull_request:
     branches: [ main ]
 
@@ -12,12 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.12'
-          
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
