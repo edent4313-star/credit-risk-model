@@ -1,0 +1,23 @@
+artifact_path: file:c:/Users/habtamu.amsalu/credit-risk-model/notebooks/mlruns/1/models/m-743f98a7f3dc4fb2adac03fd108e1f32/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.14.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.13.0
+model_id: m-743f98a7f3dc4fb2adac03fd108e1f32
+model_size_bytes: 1696372
+model_uuid: m-743f98a7f3dc4fb2adac03fd108e1f32
+prompts: null
+run_id: e068b7983bef4398a9312b922e3df56c
+utc_time_created: '2026-06-02 20:54:26.044001'
