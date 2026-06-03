@@ -2,6 +2,12 @@ import pandas as pd
 import pytest
 from src.data_processing import load_and_preprocess_data, split_dataset
 
+
+from src.data_processing import (
+    AggregateFeatures,
+    DateFeatures
+)
+
 from src.data_processing import (
     handle_missing_values
 )

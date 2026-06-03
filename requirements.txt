@@ -132,3 +132,46 @@ joblib
 pytest
 pandas
 numpy
+# Data manipulation
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+missingno
+
+# Machine Learning
+scikit-learn
+xgboost
+
+# Statistical Analysis
+scipy
+statsmodels
+
+# Feature Engineering (WoE/IV)
+xverse
+
+# Notebook Environment
+jupyter
+notebook
+ipykernel
+
+# API Development
+fastapi
+uvicorn
+
+# Testing
+pytest
+
+# Environment Variables
+python-dotenv
+
+# Logging and Utilities
+tqdm
+
+# Model Persistence
+joblib
+
+# Optional
+imbalanced-learn
