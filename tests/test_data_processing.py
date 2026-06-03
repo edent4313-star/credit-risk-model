@@ -2,6 +2,12 @@ import pandas as pd
 import pytest
 from src.data_processing import load_and_preprocess_data, split_dataset
 
+
+from src.data_processing import (
+    AggregateFeatures,
+    DateFeatures
+)
+
 from src.data_processing import (
     handle_missing_values
 )
@@ -19,6 +25,7 @@ def test_missing_values():
     assert processed_df.isnull().sum().sum() == 0
 
 
+<<<<<<< HEAD
  
 
     
@@ -51,6 +58,8 @@ from src.data_processing import (
     AggregateFeatures,
     DateFeatures
 )
+=======
+>>>>>>> 5190f6fdda8d40e777d0d40888b64700cda81401
 
 
 def test_aggregate_features():
