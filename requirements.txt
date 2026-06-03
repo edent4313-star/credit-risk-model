@@ -39,13 +39,5 @@ tqdm
 # Model Persistence
 joblib
 
-mlflow
-scikit-learn
-xgboost
-joblib
-pytest
-pandas
-numpy
-
 # Optional
 imbalanced-learn
