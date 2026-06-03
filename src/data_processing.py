@@ -13,7 +13,7 @@ from xverse.transformer import WOE
 
 from sklearn.cluster import KMeans
 
-
+from sklearn.model_selection import train_test_split
 
 
 def get_missing_values(df):
@@ -513,3 +513,30 @@ def merge_target(
         on="CustomerId",
         how="left"
     )
+
+
+
+
+def load_and_preprocess_data(df):
+    """Loads dataset, removes tracking identifiers, and applies encoding."""
+    df = pd.read_csv(df)
+    
+    # Drop identifiers and columns that won't generalize
+    cols_to_drop = ['TransactionId', 'BatchId', 'AccountId', 'SubscriptionId', 
+                    'CustomerId', 'CurrencyCode', 'TransactionStartTime', 'CountryCode']
+    df = df.drop(columns=[col for col in cols_to_drop if col in df.columns], errors='ignore')
+    
+    # One-hot encode categorical features safely
+    categorical_cols = ['ProviderId', 'ProductId', 'ProductCategory', 'ChannelId']
+    df = pd.get_dummies(df, columns=[col for col in categorical_cols if col in df.columns], drop_first=True)
+    
+    if 'FraudResult' in df.columns:
+        X = df.drop(columns=['FraudResult'])
+        y = df['FraudResult']
+    else:
+        raise ValueError("Target FraudResult column is missing from the dataset.")
+    return X, y
+
+def split_dataset(X, y, test_size=0.2, random_state=42):
+    """Splits data into reproducible training and testing sets."""
+    return train_test_split(X, y, test_size=test_size, random_state=random_state, stratify=y)
